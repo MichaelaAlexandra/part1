@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
+const Button = ({handleClick, text}) => (
+    <button onClick={handleClick}>
+        {text}
+    </button>
+)
+
+/* 
+            <button onClick={handleGoodClick}>
+                good
+            </button>
+            <button onClick={handleNeutralClick}>
+                neutral
+            </button>
+            <button onClick={handleBadClick}>
+                bad
+            </button>
+*/
+
 const Statistic = ({ text, value }) => {
     if (text === "positive") {
         return (
-            <div>
-                <p>{text} {value} %</p>
-            </div>
+            <tr>
+                <td>{text}</td>
+                <td>{value} %</td>
+            </tr>
         )
     }
     return (
-        <div>
-            <p>{text} {value}</p>
-        </div>
+        <tr>
+            <td>{text}</td>
+            <td>{value}</td>
+        </tr>
     )
 
 }
@@ -31,13 +51,15 @@ const Statistics = (props) => {
 
     if (props.allClicks === 0) {
         return (
-            <div>
-                <p>No feedback given</p>
-            </div>
+            <tbody>
+                <tr>
+                    <td>No feedback given</td>
+                </tr>
+            </tbody>
         )
     }
     return (
-        <div>
+        <tbody>
             <Statistic text="good" value={good} />
             <Statistic text="neutral" value={neutral} />
             <Statistic text="bad" value={bad} />
@@ -45,21 +67,11 @@ const Statistics = (props) => {
             <Statistic text="average" value={average} />
             <Statistic text="positive" value={positive} />
             
-        </div>
+        </tbody>
         
         
     )
 }
-
-/*
-            <h2>statistics</h2>
-            <p>good {props.good}</p>
-            <p>neutral {props.neutral}</p>
-            <p>bad {props.bad}</p>
-            <p>all {props.allClicks}</p>
-            <p>average {props.average}</p>
-            <p>positive {props.positive} %</p>
-*/
 
 
 const App = () => {
@@ -97,6 +109,20 @@ const App = () => {
     return (
         <div>
             <h2>give feedback</h2>
+            <Button handleClick={handleGoodClick} text='good' />
+            <Button handleClick={handleNeutralClick} text='neutral' />
+            <Button handleClick={handleBadClick} text='bad' />
+            <br />
+            <h2>statistics</h2>
+            <table>
+            <Statistics good={good} neutral={neutral} bad={bad}
+                allClicks={allClicks} average={averageScore()} positive={percentagePositive()} />
+            </table>
+        </div>
+    )
+}
+
+/*
             <button onClick={handleGoodClick}>
                 good
             </button>
@@ -106,13 +132,7 @@ const App = () => {
             <button onClick={handleBadClick}>
                 bad
             </button>
-            <br />
-            <h2>statistics</h2>
-            <Statistics good={good} neutral={neutral} bad={bad}
-                allClicks={allClicks} average={averageScore()} positive={percentagePositive()} />
-        </div>
-    )
-}
+*/
 
 ReactDOM.render(
     <App />, 
