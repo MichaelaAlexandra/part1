@@ -1,23 +1,12 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-const Button = ({handleClick, text}) => (
+const Button = ({ handleClick, text }) => (
     <button onClick={handleClick}>
         {text}
     </button>
 )
 
-/* 
-            <button onClick={handleGoodClick}>
-                good
-            </button>
-            <button onClick={handleNeutralClick}>
-                neutral
-            </button>
-            <button onClick={handleBadClick}>
-                bad
-            </button>
-*/
 
 const Statistic = ({ text, value }) => {
     if (text === "positive") {
@@ -45,7 +34,7 @@ const Statistics = (props) => {
     const average = props.average.toFixed(1)
     const positive = props.positive.toFixed(1)
 
-    
+
 
     console.log(props)
 
@@ -66,10 +55,10 @@ const Statistics = (props) => {
             <Statistic text="all" value={allClicks} />
             <Statistic text="average" value={average} />
             <Statistic text="positive" value={positive} />
-            
+
         </tbody>
-        
-        
+
+
     )
 }
 
@@ -94,12 +83,12 @@ const App = () => {
 
     const handleBadClick = () => {
         setAll(allClicks + 1)
-        setBad(bad +1)
-        setScore(score -1)
+        setBad(bad + 1)
+        setScore(score - 1)
     }
 
     const averageScore = () => {
-        return score / allClicks 
+        return score / allClicks
     }
 
     const percentagePositive = () => {
@@ -115,27 +104,15 @@ const App = () => {
             <br />
             <h2>statistics</h2>
             <table>
-            <Statistics good={good} neutral={neutral} bad={bad}
-                allClicks={allClicks} average={averageScore()} positive={percentagePositive()} />
+                <Statistics good={good} neutral={neutral} bad={bad}
+                    allClicks={allClicks} average={averageScore()} positive={percentagePositive()} />
             </table>
         </div>
     )
 }
 
-/*
-            <button onClick={handleGoodClick}>
-                good
-            </button>
-            <button onClick={handleNeutralClick}>
-                neutral
-            </button>
-            <button onClick={handleBadClick}>
-                bad
-            </button>
-*/
-
 ReactDOM.render(
-    <App />, 
+    <App />,
     document.getElementById('root')
 );
 
