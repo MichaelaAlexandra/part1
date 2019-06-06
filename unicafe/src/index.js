@@ -1,10 +1,57 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-const Statistics = (props) => {
-    console.log(props)
+const Statistic = ({ text, value }) => {
+    if (text === "positive") {
+        return (
+            <div>
+                <p>{text} {value} %</p>
+            </div>
+        )
+    }
     return (
         <div>
+            <p>{text} {value}</p>
+        </div>
+    )
+
+}
+
+const Statistics = (props) => {
+    const good = props.good
+    const neutral = props.neutral
+    const bad = props.bad
+    const allClicks = props.allClicks
+    const average = props.average.toFixed(1)
+    const positive = props.positive.toFixed(1)
+
+    
+
+    console.log(props)
+
+    if (props.allClicks === 0) {
+        return (
+            <div>
+                <p>No feedback given</p>
+            </div>
+        )
+    }
+    return (
+        <div>
+            <Statistic text="good" value={good} />
+            <Statistic text="neutral" value={neutral} />
+            <Statistic text="bad" value={bad} />
+            <Statistic text="all" value={allClicks} />
+            <Statistic text="average" value={average} />
+            <Statistic text="positive" value={positive} />
+            
+        </div>
+        
+        
+    )
+}
+
+/*
             <h2>statistics</h2>
             <p>good {props.good}</p>
             <p>neutral {props.neutral}</p>
@@ -12,11 +59,7 @@ const Statistics = (props) => {
             <p>all {props.allClicks}</p>
             <p>average {props.average}</p>
             <p>positive {props.positive} %</p>
-        </div>
-        
-        
-    )
-}
+*/
 
 
 const App = () => {
@@ -44,7 +87,7 @@ const App = () => {
     }
 
     const averageScore = () => {
-        return score / allClicks * 1.0
+        return score / allClicks 
     }
 
     const percentagePositive = () => {
@@ -64,6 +107,7 @@ const App = () => {
                 bad
             </button>
             <br />
+            <h2>statistics</h2>
             <Statistics good={good} neutral={neutral} bad={bad}
                 allClicks={allClicks} average={averageScore()} positive={percentagePositive()} />
         </div>
